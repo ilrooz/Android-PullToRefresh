@@ -51,12 +51,10 @@ public class PullToRefreshGridView extends PullToRefreshAdapterViewBase<GridView
 	@Override
 	protected final GridView createRefreshableView(Context context, AttributeSet attrs) {
 		final GridView gv;
-		if (VERSION.SDK_INT >= VERSION_CODES.GINGERBREAD) {
-			gv = new InternalGridViewSDK9(context, attrs);
-		} else {
-			gv = new InternalGridView(context, attrs);
-		}
-
+		gv = new InternalGridView(context, attrs);
+        if (VERSION.SDK_INT >= VERSION_CODES.GINGERBREAD) {
+            gv.setOverScrollMode(View.OVER_SCROLL_NEVER);
+        }
 		// Use Generated ID (from res/values/ids.xml)
 		gv.setId(R.id.gridview);
 		return gv;

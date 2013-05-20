@@ -204,18 +204,16 @@ public class PullToRefreshListView extends PullToRefreshAdapterViewBase<ListView
 
 	protected ListView createListView(Context context, AttributeSet attrs) {
 		final ListView lv;
-		if (VERSION.SDK_INT >= VERSION_CODES.GINGERBREAD) {
-			lv = new InternalListViewSDK9(context, attrs);
-		} else {
 			lv = new InternalListView(context, attrs);
-		}
 		return lv;
 	}
 
 	@Override
 	protected ListView createRefreshableView(Context context, AttributeSet attrs) {
 		ListView lv = createListView(context, attrs);
-
+        if (VERSION.SDK_INT >= VERSION_CODES.GINGERBREAD) {
+            lv.setOverScrollMode(View.OVER_SCROLL_NEVER);
+        }
 		// Set it to this so it can be used in ListActivity/ListFragment
 		lv.setId(android.R.id.list);
 		return lv;

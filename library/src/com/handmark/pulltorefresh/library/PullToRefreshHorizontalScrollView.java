@@ -50,12 +50,10 @@ public class PullToRefreshHorizontalScrollView extends PullToRefreshBase<Horizon
 	protected HorizontalScrollView createRefreshableView(Context context, AttributeSet attrs) {
 		HorizontalScrollView scrollView;
 
-		if (VERSION.SDK_INT >= VERSION_CODES.GINGERBREAD) {
-			scrollView = new InternalHorizontalScrollViewSDK9(context, attrs);
-		} else {
-			scrollView = new HorizontalScrollView(context, attrs);
-		}
-
+		scrollView = new HorizontalScrollView(context, attrs);
+        if (VERSION.SDK_INT >= VERSION_CODES.GINGERBREAD) {
+            scrollView.setOverScrollMode(View.OVER_SCROLL_NEVER);
+        }
 		scrollView.setId(R.id.scrollview);
 		return scrollView;
 	}

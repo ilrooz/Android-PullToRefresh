@@ -22,6 +22,7 @@ import android.os.Build.VERSION_CODES;
 import android.os.Bundle;
 import android.util.AttributeSet;
 import android.util.FloatMath;
+import android.view.View;
 import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 
@@ -95,12 +96,10 @@ public class PullToRefreshWebView extends PullToRefreshBase<WebView> {
 	@Override
 	protected WebView createRefreshableView(Context context, AttributeSet attrs) {
 		WebView webView;
-		if (VERSION.SDK_INT >= VERSION_CODES.GINGERBREAD) {
-			webView = new InternalWebViewSDK9(context, attrs);
-		} else {
-			webView = new WebView(context, attrs);
-		}
-
+		webView = new WebView(context, attrs);
+        if (VERSION.SDK_INT >= VERSION_CODES.GINGERBREAD) {
+            webView.setOverScrollMode(View.OVER_SCROLL_NEVER);
+        }
 		webView.setId(R.id.webview);
 		return webView;
 	}

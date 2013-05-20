@@ -51,12 +51,10 @@ public class PullToRefreshExpandableListView extends PullToRefreshAdapterViewBas
 	@Override
 	protected ExpandableListView createRefreshableView(Context context, AttributeSet attrs) {
 		final ExpandableListView lv;
-		if (VERSION.SDK_INT >= VERSION_CODES.GINGERBREAD) {
-			lv = new InternalExpandableListViewSDK9(context, attrs);
-		} else {
-			lv = new InternalExpandableListView(context, attrs);
-		}
-
+		lv = new InternalExpandableListView(context, attrs);
+        if (VERSION.SDK_INT >= VERSION_CODES.GINGERBREAD) {
+            lv.setOverScrollMode(View.OVER_SCROLL_NEVER);
+        }
 		// Set it to this so it can be used in ListActivity/ListFragment
 		lv.setId(android.R.id.list);
 		return lv;
